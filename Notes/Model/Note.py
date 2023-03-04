@@ -14,7 +14,7 @@ class Note:
     # @property
     # def title(self):
     #     return self.title
-
+    #
     # @property
     # def text(self):
     #     return self.text
@@ -26,7 +26,7 @@ class Note:
     # @title.setter
     # def title(self, new_input):
     #     self.title = new_input
-
+    #
     # @text.setter
     # def text(self, new_input):
     #     self.text = new_input

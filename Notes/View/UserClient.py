@@ -21,9 +21,9 @@ class UserClient:
                 if select not in [1, 2]:
                     self.is_ok = False
                     print('Incorrect number. Try again. ')
-            except ValueError:
+            except TypeError:
                 print('This is not a number. Try again. ')
-        return select
+        return select  # Choice number
 
     def show_menu(self) -> int:
         print("\n" + "=" * 35)
@@ -50,10 +50,10 @@ class UserClient:
                 print('This is not a number. Try again.')
         return select
 
-    # def get_new_note_info(self) -> dict:
-    #     title = input('Enter the title for the new note: ')
-    #     text = input('Enter the details of the new note: ')
-    #     return title, text
+    def get_new_note_info(self) -> tuple:
+        title = self.prompt('Enter the title for the note: ')
+        text = self.prompt('Enter the details of the note: ')
+        return title, text
 
     def print_tabulated_table(self, list_of_dictionaries) -> None:
         table = []
@@ -71,6 +71,7 @@ class UserClient:
 
     def prompt(self, ask_message):
         return input(ask_message)
+
 
 
 # x = UserClient()
