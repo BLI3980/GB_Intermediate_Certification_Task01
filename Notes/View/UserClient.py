@@ -72,7 +72,9 @@ class UserClient:
     def prompt(self, ask_message):
         return input(ask_message)
 
-
+    def print_notebook(self, notebook):
+        for note in notebook:
+            print(str(note))
 
 # x = UserClient()
 # print(x.get_new_note_info())
