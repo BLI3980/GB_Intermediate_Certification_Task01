@@ -13,5 +13,5 @@ The program can work either with .csv or .json formats as database for the noteb
 Make sure to do the following:
 - Activate virtual environment if not done already
 - Run in terminal the following command in order to load required libraries:
-- pip install -r requirements.txt
+  - pip install -r requirements.txt
 
