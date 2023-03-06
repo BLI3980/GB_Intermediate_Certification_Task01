@@ -18,33 +18,33 @@ class Controller:
         # greeting
         self.user.greeting()
         # choose notebook database
-        # self.notebook = self.model.choose_db()
         self.db = self.model.choose_db_type()  # type of database file
         self.notebook = self.db.read_db()  # Load certain type of file
-        print(id(self.notebook))
-        self.user.print_notebook(self.notebook)
         while True:
             # get a choice from user - integer
             user_action = self.user.show_menu()
             # take action based on choice
-            if user_action == 10:
+            if user_action == 8:
                 # save to database
                 self.db.save_db(self.notebook)
                 return
             match user_action:
                 case 1:  # Show all
-                    self.model.show_all_notes(self.notebook)
+                    # self.model.show_all_notes(self.notebook)
+                    self.user.print_tabulated_table(self.notebook)
                     time.sleep(self.pause)
                 case 2:  # Create
                     self.model.create_new_note(self.notebook)
                     time.sleep(self.pause)
                 case 3:  # Find by ID
                     user_id = self.validate_id(self.notebook)
-                    self.model.find_by_id(user_id, self.notebook)
+                    note_found = self.model.find_by_id(user_id, self.notebook)
+                    self.user.print_tabulated_table(note_found)
                     time.sleep(self.pause)
                 case 4:  # Find by Title
                     search_title = self.user.prompt('Enter search title: ')
-                    self.model.find_by_title(search_title, self.notebook)
+                    notes_found = self.model.find_by_title(search_title, self.notebook)
+                    self.user.print_tabulated_table(notes_found)
                     time.sleep(self.pause)
                 case 5:  # Edit
                     user_id = self.validate_id(self.notebook)

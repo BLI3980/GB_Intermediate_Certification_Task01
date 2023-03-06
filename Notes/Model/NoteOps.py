@@ -1,3 +1,4 @@
+from datetime import datetime
 from Notes.Model.Note import Note
 from Notes.Model.DbManager import DbManager
 from Notes.View.UserClient import UserClient
@@ -23,33 +24,30 @@ class NoteOps:
 
     @staticmethod
     def show_all_notes(notebook) -> None:
-        print(id(notebook))
         [print(str(note)) for note in notebook]
 
     def create_new_note(self, notebook) -> list:
-        print(id(notebook))
-        [print(str(note)) for note in notebook]
         title = self.user.prompt('Enter new note title: ')
         text = self.user.prompt('Enter new note text: ')
         new_note = Note(title, text)
-        if len(notebook) !=0:
+        if len(notebook) != 0:
             new_id = max([int(note.id) for note in notebook])+1
         else:
             new_id = 1
         new_note.id = new_id
         notebook.append(new_note)
-        print(id(notebook))
-        [print(str(note)) for note in notebook]
         return notebook  # list of Note objects
 
     @staticmethod
-    def find_by_id(user_id, notebook) -> None:
+    def find_by_id(user_id, notebook) -> list:
+        note_lst = []
         for note in notebook:
             if int(note.id) == int(user_id):
-                print(str(note))
+                note_lst.append(note)
+        return note_lst
 
     @staticmethod
-    def find_by_title(title_contains: str, notebook) -> None:
+    def find_by_title(title_contains: str, notebook) -> list:
         notes_found = []
         for note in notebook:
             if str(title_contains) not in str(note.title):
@@ -57,28 +55,21 @@ class NoteOps:
             else:
                 notes_found.append(note)
 
-        if len(notes_found) != 0:
-            for note in notes_found:
-                print(str(note))
-        else:
+        if len(notes_found) == 0:
             print('\nThere is no note containing such text in the title. ')
+            return notes_found
+        else:
+            return notes_found
 
     def edit_note(self, user_id, notebook):
-        # self.notebook = self.db.read_db()
         updated_note = self.user.get_new_note_info()
         title = updated_note[0]
-        print(title)
         text = updated_note[1]
-        print(text)
-        # updated_note = Note(title, text)
         for note in notebook:
             if int(note.id) == int(user_id):
-                print(str(note))
                 note.title = title
                 note.text = text
-                print(str(note))
-        print(id(notebook))
-        [print(str(note)) for note in notebook]
+                note.timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         return notebook
 
     @staticmethod
@@ -91,6 +82,3 @@ class NoteOps:
             list_index += 1
         notebook.pop(target_index)
 
-
-# x.show_all_notes()
-# print(x.create_new_note())

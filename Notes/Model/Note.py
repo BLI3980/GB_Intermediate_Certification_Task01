@@ -1,3 +1,5 @@
+from datetime import datetime
+
 
 class Note:
     """Class creates a note instance"""
@@ -6,6 +8,7 @@ class Note:
         self.__id = 0
         self.title = title
         self.text = text
+        self.timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
     @property
     def id(self):
@@ -20,5 +23,6 @@ class Note:
             f'id: {self.id}\n'\
             f'title: {self.title}\n'\
             f'note text: {self.text}\n' \
-               f'\n{"=" * 30}'\
+            f'time stamp: {self.timestamp}'\
+            f'\n{"=" * 30}'\
 

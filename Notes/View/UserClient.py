@@ -27,16 +27,14 @@ class UserClient:
 
     def show_menu(self) -> int:
         print("\n" + "=" * 35)
-        print(emojize(":play_button:  Choose an action from the list below: "))
+        print(emojize("   :play_button:  Choose an action from the list below: "))
         print(emojize("1. :department_store: Show the entire notebook"))
         print(emojize("2. :NEW_button: Create new note"))
         print(emojize("3. :magnifying_glass_tilted_left: Find a note by ID"))
         print(emojize("4. :magnifying_glass_tilted_right: Find a note by Title"))
         print(emojize("5. :memo: Edit a note"))
         print(emojize("6. :cross_mark: Delete a note"))
-        print(emojize("8. :floppy_disk: Export notebook into csv file"))
-        print(emojize("9. :dvd: Export notebook into json file"))
-        print(emojize("10.:stop_button:End the work"))
+        print(emojize("8. :stop_button:End the work"))
         print("=" * 35 + "\n")
         self.is_ok = False
         while not self.is_ok:
@@ -55,26 +53,27 @@ class UserClient:
         text = self.prompt('Enter the details of the note: ')
         return title, text
 
-    def print_tabulated_table(self, list_of_dictionaries) -> None:
+    @staticmethod
+    def print_tabulated_table(list_of_notes) -> None:
         table = []
-        temp = []
-        for dictionary in list_of_dictionaries:
-            for value in dictionary.values():
-                # Get a list of values from each dictionary.
-                temp.append(value)
+        note_lst = []
+        for note in list_of_notes:
+            note_lst.append(note.id)
+            note_lst.append(note.title)
+            note_lst.append(note.text)
+            note_lst.append(note.timestamp)
             # Get a list of lists.
-            table.append(temp)
-            temp = []
-        header1 = ['NOTE ID', 'TITLE', 'FULL DESCRIPTION']
+            table.append(note_lst)
+            note_lst = []
+        header1 = ['NOTE ID', 'TITLE', 'FULL DESCRIPTION', 'TIME STAMP']
         print(tabulate(table, headers=header1,
                        tablefmt='fancy_grid', showindex='false'))
 
-    def prompt(self, ask_message):
+    @staticmethod
+    def prompt(ask_message) -> str:
         return input(ask_message)
 
-    def print_notebook(self, notebook):
+    @staticmethod
+    def print_notebook(notebook) -> None:
         for note in notebook:
             print(str(note))
-
-# x = UserClient()
-# print(x.get_new_note_info())
