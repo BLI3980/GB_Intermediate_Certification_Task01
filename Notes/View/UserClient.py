@@ -21,7 +21,7 @@ class UserClient:
                 if select not in [1, 2]:
                     self.is_ok = False
                     print('Incorrect number. Try again. ')
-            except TypeError:
+            except ValueError:
                 print('This is not a number. Try again. ')
         return select  # Choice number
 
@@ -34,14 +34,14 @@ class UserClient:
         print(emojize("4. :magnifying_glass_tilted_right: Find a note by Title"))
         print(emojize("5. :memo: Edit a note"))
         print(emojize("6. :cross_mark: Delete a note"))
-        print(emojize("8. :stop_button:End the work"))
+        print(emojize("7. :stop_button:End the work"))
         print("=" * 35 + "\n")
         self.is_ok = False
         while not self.is_ok:
             try:
                 select = int(input("Enter a number of corresponding action: "))
                 self.is_ok = True
-                if select not in range(1, 11):
+                if select not in range(1, 8):
                     self.is_ok = False
                     print('Incorrect number. Try again.')
             except ValueError:
@@ -71,7 +71,14 @@ class UserClient:
 
     @staticmethod
     def prompt(ask_message) -> str:
-        return input(ask_message)
+        is_valid = False
+        while not is_valid:
+            reply = input(ask_message)
+            if (reply.isspace()) or (reply == ''):
+                print('Entry cannot be empty. Try again.')
+            else:
+                is_valid = True
+        return reply
 
     @staticmethod
     def print_notebook(notebook) -> None:

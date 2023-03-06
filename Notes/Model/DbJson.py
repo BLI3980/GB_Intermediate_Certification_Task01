@@ -5,7 +5,7 @@ from Notes.Config.Config import source_json
 
 
 class DbJson(Database):
-    """Class interacts with csv database"""
+    """Class interacts with json database"""
     def __init__(self):
         super().__init__(source_json)
 

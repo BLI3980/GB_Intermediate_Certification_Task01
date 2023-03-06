@@ -1,7 +1,6 @@
 import time
 from Notes.View.UserClient import UserClient
 from Notes.Model.NoteOps import NoteOps
-from Notes.Model.Database import Database
 
 
 class Controller:
@@ -11,26 +10,25 @@ class Controller:
         self.db = None
         self.pause = 2
         self.notebook = []  # Notebook instance to which database will be loaded
-        self.model = NoteOps()  # New instance of NoteOps
-        self.user = UserClient()  # New instance of UserClient
+        self.model = NoteOps()  # New instance of NoteOps class
+        self.user = UserClient()  # New instance of UserClient class
 
     def run(self):
         # greeting
         self.user.greeting()
-        # choose notebook database
+        # choose notebook database format
         self.db = self.model.choose_db_type()  # type of database file
-        self.notebook = self.db.read_db()  # Load certain type of file
+        self.notebook = self.db.read_db()  # Load certain type of file into list
         while True:
-            # get a choice from user - integer
+            # get a choice from user
             user_action = self.user.show_menu()
             # take action based on choice
-            if user_action == 8:
-                # save to database
+            if user_action == 7:
+                # save to back database
                 self.db.save_db(self.notebook)
                 return
             match user_action:
                 case 1:  # Show all
-                    # self.model.show_all_notes(self.notebook)
                     self.user.print_tabulated_table(self.notebook)
                     time.sleep(self.pause)
                 case 2:  # Create
@@ -67,7 +65,6 @@ class Controller:
             except ValueError:
                 print('This is not a number. Try again')
         return user_id
-
 
 
 

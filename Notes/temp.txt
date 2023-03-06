@@ -1,4 +1,0 @@
-1;header 1;note text 1
-2;header 2;note text 2
-3;header 3;note text 3
-4;title 4;text 4
