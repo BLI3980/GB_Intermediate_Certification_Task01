@@ -11,6 +11,15 @@ class UserClient:
     def greeting():
         return print('\nWelcome to notebook app!')
 
+    @staticmethod
+    def confirm(operation) -> None:
+        if operation == 2:
+            return print('\nNew note successfully created.\n')
+        if operation == 5:
+            return print('\nThe note successfully updated.\n')
+        if operation == 6:
+            return print('\nThe note is now deleted.\n')
+
     def choose_db_format(self) -> int:
         print('\nWhich database format do you want to use?')
         self.is_ok = False
@@ -26,9 +35,9 @@ class UserClient:
         return select  # Choice number
 
     def show_menu(self) -> int:
-        print("\n" + "=" * 35)
-        print(emojize("   :play_button:  Choose an action from the list below: "))
-        print(emojize("1. :department_store: Show the entire notebook"))
+        print("\nChoose an action from the list below: ")
+        print("=" * 35)
+        print(emojize("1. :notebook: Show the entire notebook"))
         print(emojize("2. :NEW_button: Create new note"))
         print(emojize("3. :magnifying_glass_tilted_left: Find a note by ID"))
         print(emojize("4. :magnifying_glass_tilted_right: Find a note by Title"))

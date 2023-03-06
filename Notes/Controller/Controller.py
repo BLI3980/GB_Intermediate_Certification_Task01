@@ -34,6 +34,7 @@ class Controller:
                 case 2:  # Create
                     self.model.create_new_note(self.notebook)
                     time.sleep(self.pause)
+                    self.user.confirm(user_action)
                 case 3:  # Find by ID
                     user_id = self.validate_id(self.notebook)
                     note_found = self.model.find_by_id(user_id, self.notebook)
@@ -48,10 +49,12 @@ class Controller:
                     user_id = self.validate_id(self.notebook)
                     self.model.edit_note(user_id, self.notebook)
                     time.sleep(self.pause)
+                    self.user.confirm(user_action)
                 case 6:  # Delete
                     user_id = self.validate_id(self.notebook)
                     self.model.delete_note(user_id, self.notebook)
                     time.sleep(self.pause)
+                    self.user.confirm(user_action)
 
     def validate_id(self, notebook):
         id_valid = False
