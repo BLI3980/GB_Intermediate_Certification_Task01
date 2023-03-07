@@ -1,2 +1,2 @@
-source_csv = 'C:\_GB\\7_Python_Notes\\Notes\DB\database.csv'
-source_json = 'C:\_GB\\7_Python_Notes\\Notes\DB\database.json'
+source_csv = '..\\Notes\DB\database.csv'
+source_json = '..\\Notes\DB\database.json'
